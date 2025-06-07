@@ -1,0 +1,91 @@
+package CaseMethod2;
+import CaseMethod2.BBM.BBM;
+import CaseMethod2.Kendaraan.AntrianKendaraan;
+import CaseMethod2.Kendaraan.Kendaraan;
+import CaseMethod2.TransaksiPengisian.AntrianTransaksi;
+import CaseMethod2.TransaksiPengisian.TransaksiPengisisan;
+import java.util.Scanner;
+
+
+public class MainSPBU {
+
+    private static Kendaraan inputKendaraan() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Masukkan Plat Nomor:  ");
+        String plat = scanner.nextLine();
+        System.out.print("Masukkan Jenis Kendaraan: ");
+        String jenis = scanner.nextLine();
+        System.out.print("Masukkan Merk Kendaraan: ");
+        String merk = scanner.nextLine();
+        return new Kendaraan(plat, jenis, merk);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        AntrianKendaraan antrianKendaraan = new AntrianKendaraan();
+        AntrianTransaksi antrianTransaksi = new AntrianTransaksi(10);
+        int pilihan;
+
+        do {
+            System.out.println("=== Menu SPBU ===");
+            System.out.println("1. Tambah Antrian Kendaraan");
+            System.out.println("2. Tampilkan Antrian");
+            System.out.println("3. Cek jumlah Antrian Kendaraan");
+            System.out.println("4. Proses Pengisian BBM");
+            System.out.println("5. Tampilkan Riwayat Transaksi");
+            System.out.println("0. Keluar");
+            System.out.print("Pilih menu: ");
+            pilihan = scanner.nextInt(); scanner.nextLine(); // Clear the newline character
+            switch (pilihan) {
+                case 1:
+                    Kendaraan kendaraan = inputKendaraan();
+                    antrianKendaraan.enqueue(kendaraan);
+                    break;
+                case 2:
+                    System.out.println("=== Antrian Kendaraan ===");
+                    antrianKendaraan.tampilkanAntrian();
+                    break;
+                case 3:
+                    System.out.println("Jumlah Antrian Kendaraan: " + antrianKendaraan.jumlahAntrian());
+                    break;
+                case 4:
+                    if(antrianKendaraan.isEmpty()) {
+                        System.out.println("Antrian Kendaraan Kosong");
+                        break;
+                    } else {
+                        Kendaraan dilayani = antrianKendaraan.dequeue();
+                        System.out.println("Kendaraan yang Dilayani:" + dilayani.platNomor);
+                        System.out.print("Masukkan Jenis BBM: ");
+                        String jenisBBM = scanner.nextLine();
+                        System.out.print("Masukkan Harga per Liter: ");
+                        double hargaPerLiter = scanner.nextDouble(); scanner.nextLine(); // Clear the newline character
+                        System.out.print("Masukkan Jumlah Liter: ");
+                        double liter = scanner.nextDouble(); scanner.nextLine(); // Clear the newline character
+                        BBM bbm = new BBM(jenisBBM, hargaPerLiter);
+                        TransaksiPengisisan transaksi = new TransaksiPengisisan(dilayani, bbm, liter);
+                        transaksi.hitungTotalBayar();
+                        antrianTransaksi.enqueue(transaksi);
+                        System.out.println(">> Transaksi berhasil dicatat.");
+                    }
+                    break;
+                case 5:
+                    if(antrianTransaksi.isEmpty()) {
+                        System.out.println("Tidak ada transaksi yang tercatat.");
+                    } else {
+                        System.out.println("=== Riwayat Transaksi Pengisian BBM ===");
+                        System.out.println("Daftar Transaksi:");
+                        antrianTransaksi.tampil();
+                    }
+                    break;
+                case 0:
+                    System.out.println("Keluar dari program.");
+                    System.exit(0);
+                    break;
+                default:
+                    break;
+            }
+        }while (pilihan != 0); 
+        scanner.close();
+    }
+    
+}
