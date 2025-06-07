@@ -15,6 +15,57 @@ public class AntrianKendaraan {
         }
     }
 
+    public void addFirst(Kendaraan kendaraan) {
+        NodeKendaraan newNode = new NodeKendaraan(kendaraan);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        }
+    }
+
+    public void addByIndex(Kendaraan kendaraan, int index) {
+        if (index < 0 || index > jumlahAntrian()) {
+            System.out.println("Index di luar jangkauan");
+            return;
+        }
+        if (index == 0) {
+            addFirst(kendaraan);
+            return;
+        }
+        if (index == jumlahAntrian()) {
+            enqueue(kendaraan);
+            return;
+        }
+        
+        NodeKendaraan newNode = new NodeKendaraan(kendaraan);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            NodeKendaraan current = head;
+            while (current != null && current.data.platNomor.compareTo(kendaraan.platNomor) < 0) {
+                current = current.next;
+            }
+            if (current == head) {
+                addFirst(kendaraan);
+            } else if (current == null) {
+                enqueue(kendaraan);
+            } else {
+                newNode.prev = current.prev;
+                newNode.next = current;
+                if (current.prev != null) {
+                    current.prev.next = newNode;
+                }
+                current.prev = newNode;
+                if (newNode.prev == null) {
+                    head = newNode; // Update head if inserting at the front
+                }
+            }
+        }
+    }
+
     public Kendaraan dequeue(){
         if(head == null) {
             System.out.println("Antrian Kosong");

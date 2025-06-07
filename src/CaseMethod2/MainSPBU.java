@@ -2,28 +2,17 @@ package CaseMethod2;
 import CaseMethod2.BBM.BBM;
 import CaseMethod2.Kendaraan.AntrianKendaraan;
 import CaseMethod2.Kendaraan.Kendaraan;
-import CaseMethod2.TransaksiPengisian.AntrianTransaksi;
-import CaseMethod2.TransaksiPengisian.TransaksiPengisisan;
+import CaseMethod2.Menu.Tambahkan;
+import CaseMethod2.TransaksiPengisian.*;
 import java.util.Scanner;
 
-
 public class MainSPBU {
-
-    private static Kendaraan inputKendaraan() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Masukkan Plat Nomor:  ");
-        String plat = scanner.nextLine();
-        System.out.print("Masukkan Jenis Kendaraan: ");
-        String jenis = scanner.nextLine();
-        System.out.print("Masukkan Merk Kendaraan: ");
-        String merk = scanner.nextLine();
-        return new Kendaraan(plat, jenis, merk);
-    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         AntrianKendaraan antrianKendaraan = new AntrianKendaraan();
         AntrianTransaksi antrianTransaksi = new AntrianTransaksi(10);
+        Tambahkan tambahkan = new Tambahkan(antrianKendaraan);
         int pilihan;
 
         do {
@@ -38,8 +27,7 @@ public class MainSPBU {
             pilihan = scanner.nextInt(); scanner.nextLine(); // Clear the newline character
             switch (pilihan) {
                 case 1:
-                    Kendaraan kendaraan = inputKendaraan();
-                    antrianKendaraan.enqueue(kendaraan);
+                    tambahkan.tambahKendaraan();
                     break;
                 case 2:
                     System.out.println("=== Antrian Kendaraan ===");
