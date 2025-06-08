@@ -3,6 +3,7 @@ import CaseMethod2.BBM.BBM;
 import CaseMethod2.Kendaraan.AntrianKendaraan;
 import CaseMethod2.Kendaraan.Kendaraan;
 import CaseMethod2.Menu.Tambahkan;
+import CaseMethod2.Menu.Tampilkan;
 import CaseMethod2.Menu.Hapus;
 import CaseMethod2.TransaksiPengisian.*;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ public class MainSPBU {
         AntrianKendaraan antrianKendaraan = new AntrianKendaraan();
         AntrianTransaksi antrianTransaksi = new AntrianTransaksi(10);
         Tambahkan tambahkan = new Tambahkan(antrianKendaraan);
+        Tampilkan tampilkan = new Tampilkan(antrianKendaraan);
         Hapus hapus = new Hapus(antrianKendaraan);
         int pilihan;
 
@@ -33,8 +35,7 @@ public class MainSPBU {
                     tambahkan.tambahKendaraan();
                     break;
                 case 2:
-                    System.out.println("=== Antrian Kendaraan ===");
-                    antrianKendaraan.tampilkanAntrian();
+                    tampilkan.tampilkanMenu();
                     break;
                 case 3:
                     System.out.println("Jumlah Antrian Kendaraan: " + antrianKendaraan.jumlahAntrian());

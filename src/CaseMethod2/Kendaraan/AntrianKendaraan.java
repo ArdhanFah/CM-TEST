@@ -20,9 +20,13 @@ public class AntrianKendaraan {
         this.tail = tail;
     }
 
+    public boolean isEmpty() {
+        return head == null;
+    }
+
     public void enqueue(Kendaraan kendaraan) {
         NodeKendaraan newNode = new NodeKendaraan(kendaraan);
-        if (head == null) {
+        if (isEmpty()) {
             head = tail = newNode;
         } else {
             tail.next = newNode;
@@ -116,7 +120,4 @@ public class AntrianKendaraan {
         return count;
     }
 
-    public boolean isEmpty() {
-        return head == null;
-    }
 }
