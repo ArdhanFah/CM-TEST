@@ -4,6 +4,22 @@ public class AntrianKendaraan {
     private NodeKendaraan head;
     private NodeKendaraan tail;
 
+    public NodeKendaraan getHead() {
+        return head;
+    }
+
+    public void setHead(NodeKendaraan head) {
+        this.head = head;
+    }
+
+    public NodeKendaraan getTail() {
+        return tail;
+    }
+
+    public void setTail(NodeKendaraan tail) {
+        this.tail = tail;
+    }
+
     public void enqueue(Kendaraan kendaraan) {
         NodeKendaraan newNode = new NodeKendaraan(kendaraan);
         if (head == null) {

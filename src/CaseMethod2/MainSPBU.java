@@ -3,6 +3,7 @@ import CaseMethod2.BBM.BBM;
 import CaseMethod2.Kendaraan.AntrianKendaraan;
 import CaseMethod2.Kendaraan.Kendaraan;
 import CaseMethod2.Menu.Tambahkan;
+import CaseMethod2.Menu.Hapus;
 import CaseMethod2.TransaksiPengisian.*;
 import java.util.Scanner;
 
@@ -13,6 +14,7 @@ public class MainSPBU {
         AntrianKendaraan antrianKendaraan = new AntrianKendaraan();
         AntrianTransaksi antrianTransaksi = new AntrianTransaksi(10);
         Tambahkan tambahkan = new Tambahkan(antrianKendaraan);
+        Hapus hapus = new Hapus(antrianKendaraan);
         int pilihan;
 
         do {
@@ -22,6 +24,7 @@ public class MainSPBU {
             System.out.println("3. Cek jumlah Antrian Kendaraan");
             System.out.println("4. Proses Pengisian BBM");
             System.out.println("5. Tampilkan Riwayat Transaksi");
+            System.out.println("6. Hapus Kendaraan");
             System.out.println("0. Keluar");
             System.out.print("Pilih menu: ");
             pilihan = scanner.nextInt(); scanner.nextLine(); // Clear the newline character
@@ -65,11 +68,15 @@ public class MainSPBU {
                         antrianTransaksi.tampil();
                     }
                     break;
+                case 6:
+                    hapus.menuHapus();
+                    break;
                 case 0:
                     System.out.println("Keluar dari program.");
                     System.exit(0);
                     break;
                 default:
+                    System.out.println("Pilihan tidak valid!");
                     break;
             }
         }while (pilihan != 0); 
